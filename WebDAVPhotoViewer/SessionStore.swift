@@ -17,6 +17,9 @@ import Combine
     @Published var errorMessage: String?
     @Published var client: WebDAVClient?
 
+    /// 文件夹封面缓存：记录每个文件夹内的第一张图片，供瀑布流封面使用
+    let coverStore = FolderCoverStore()
+
     /// 是否开启「扫描所有子文件夹的照片」（递归收集全部图片到同一视图）
     @Published var scanAllFolders = false
     /// 递归扫描得到的全部照片（scanAllFolders 为 true 时生效）
@@ -108,6 +111,7 @@ import Combine
         pathStack = []
         allPhotos = []
         scanAllFolders = false
+        coverStore.clear()
         isLoggedIn = false
         errorMessage = nil
     }
@@ -180,6 +184,21 @@ import Combine
     private var images: [WebDAVItem] {
         if scanAllFolders { return allPhotos }
         return items.filter { !$0.isDirectory && $0.isImage }
+    }
+
+    /// 瀑布流展示的条目：文件夹 + 图片混合排序（扫描模式下仅扁平照片列表）
+    func displayItems(search: String) -> [WebDAVItem] {
+        let list: [WebDAVItem]
+        if scanAllFolders {
+            list = allPhotos
+        } else {
+            let selfPath = currentPath.trimmingCharacters(in: ["/"])
+            // 排除目录自身（PROPFIND 会把当前目录也列出来）
+            list = items.filter { $0.id.trimmingCharacters(in: ["/"]) != selfPath }
+        }
+        let sorted = applySort(list)
+        if search.isEmpty { return sorted }
+        return sorted.filter { $0.name.localizedCaseInsensitiveContains(search) }
     }
 
     func filteredImages(search: String) -> [WebDAVItem] {

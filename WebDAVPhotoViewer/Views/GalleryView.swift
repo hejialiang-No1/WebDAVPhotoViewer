@@ -37,22 +37,24 @@ struct GalleryView: View {
         GeometryReader { geo in
             let cols = max(1, min(columns, 2))
             let cw = cols == 1 ? (geo.size.width - 16) : (geo.size.width - 20) / 2
-            let images = session.filteredImages(search: searchText)
-            let heights = images.map { cw * (sizeStore.aspects[$0.id] ?? 1.3) }
+            let cells = session.displayItems(search: searchText)
+            // 文件夹默认按正方形（封面加载后按封面比例），图片按已记录的宽高比
+            let heights = cells.map { cell -> CGFloat in
+                let aspect = sizeStore.aspects[cell.id] ?? (cell.isDirectory ? 1.0 : 1.3)
+                return cw * aspect
+            }
             let frameWidth = cw * CGFloat(cols) + 4 * CGFloat(cols - 1)
 
             ScrollView {
                 VStack(spacing: 8) {
-                    if !session.scanAllFolders { foldersSection }
                     MasonryLayout(columns: cols, spacing: 4, columnWidth: cw, heights: heights) {
-                        ForEach(images) { item in
-                            PhotoCell(item: item, client: session.client!, cache: imageCache, sizeStore: sizeStore)
-                                .onTapGesture { selectedItem = item }
+                        ForEach(cells) { cell in
+                            cellView(for: cell)
                         }
                     }
                     .frame(width: frameWidth)
 
-                    if images.isEmpty && !session.isLoading {
+                    if cells.isEmpty && !session.isLoading {
                         emptyView
                     }
                 }
@@ -61,7 +63,7 @@ struct GalleryView: View {
             }
             .background(backgroundGradient)
             .overlay {
-                if session.isLoading && images.isEmpty {
+                if session.isLoading && cells.isEmpty {
                     VStack(spacing: 10) {
                         ProgressView()
                         if session.scanAllFolders {
@@ -79,22 +81,15 @@ struct GalleryView: View {
     }
 
     @ViewBuilder
-    private var foldersSection: some View {
-        if !session.folders.isEmpty {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(session.folders) { folder in
-                        Button { session.navigate(to: folder) } label: {
-                            Label(folder.name, systemImage: "folder.fill")
-                                .padding(.horizontal, 14)
-                                .padding(.vertical, 10)
-                                .glassCard(cornerRadius: 14)
-                        }
-                        .foregroundStyle(.primary)
-                    }
-                }
-                .padding(.horizontal, 4)
+    private func cellView(for cell: WebDAVItem) -> some View {
+        if cell.isDirectory {
+            FolderCell(item: cell, client: session.client!, cache: imageCache,
+                       sizeStore: sizeStore, coverStore: session.coverStore) {
+                session.navigate(to: cell)
             }
+        } else {
+            PhotoCell(item: cell, client: session.client!, cache: imageCache, sizeStore: sizeStore)
+                .onTapGesture { selectedItem = cell }
         }
     }
 
@@ -103,7 +98,7 @@ struct GalleryView: View {
             Image(systemName: "photo.on.rectangle.angled")
                 .font(.system(size: 42))
                 .foregroundStyle(.secondary)
-            Text(session.errorMessage ?? "该目录下没有图片")
+            Text(session.errorMessage ?? "该目录下没有内容")
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
