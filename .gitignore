@@ -1,0 +1,15 @@
+# Xcode / 构建产物
+build/
+DerivedData/
+*.xcuserdata
+*.xcworkspace/xcuserdata
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# macOS
+.DS_Store
+
+# 未签名 IPA 二进制（构建产物，体积大且随版本变化；需要时用 build_ipa.sh / resign.sh 重新生成）
+*.ipa

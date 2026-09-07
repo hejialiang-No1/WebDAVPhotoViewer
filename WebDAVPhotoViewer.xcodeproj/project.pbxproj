@@ -1,0 +1,284 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1B2C3000000000000000014 /* WebDAVPhotoViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3000000000000000013; };
+		A1B2C3000000000000000016 /* Views/RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3000000000000000015; };
+		A1B2C3000000000000000018 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3000000000000000017; };
+		A1B2C300000000000000001A /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3000000000000000019; };
+		A1B2C300000000000000001C /* Services/WebDAVClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C300000000000000001B; };
+		A1B2C300000000000000001E /* Services/KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C300000000000000001D; };
+		A1B2C3000000000000000020 /* Services/ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C300000000000000001F; };
+		A1B2C3000000000000000022 /* Views/MasonryLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3000000000000000021; };
+		A1B2C3000000000000000024 /* Views/RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3000000000000000023; };
+		A1B2C3000000000000000026 /* Views/LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3000000000000000025; };
+		A1B2C3000000000000000028 /* Views/GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3000000000000000027; };
+		A1B2C300000000000000002A /* Views/PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3000000000000000029; };
+		A1B2C300000000000000002C /* Views/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C300000000000000002B; };
+		A1B2C300000000000000002E /* Views/DirectoryBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C300000000000000002D; };
+		A1B2C3000000000000000011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3000000000000000010; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A1B2C3000000000000000013 /* WebDAVPhotoViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebDAVPhotoViewerApp.swift"; sourceTree = "<group>"; };
+		A1B2C3000000000000000015 /* Views/RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/RootView.swift"; sourceTree = "<group>"; };
+		A1B2C3000000000000000017 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionStore.swift"; sourceTree = "<group>"; };
+		A1B2C3000000000000000019 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models.swift"; sourceTree = "<group>"; };
+		A1B2C300000000000000001B /* Services/WebDAVClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/WebDAVClient.swift"; sourceTree = "<group>"; };
+		A1B2C300000000000000001D /* Services/KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/KeychainHelper.swift"; sourceTree = "<group>"; };
+		A1B2C300000000000000001F /* Services/ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/ImageCache.swift"; sourceTree = "<group>"; };
+		A1B2C3000000000000000021 /* Views/MasonryLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/MasonryLayout.swift"; sourceTree = "<group>"; };
+		A1B2C3000000000000000023 /* Views/RemoteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/RemoteImageView.swift"; sourceTree = "<group>"; };
+		A1B2C3000000000000000025 /* Views/LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/LoginView.swift"; sourceTree = "<group>"; };
+		A1B2C3000000000000000027 /* Views/GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/GalleryView.swift"; sourceTree = "<group>"; };
+		A1B2C3000000000000000029 /* Views/PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/PhotoDetailView.swift"; sourceTree = "<group>"; };
+		A1B2C300000000000000002D /* Views/DirectoryBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/DirectoryBrowserView.swift"; sourceTree = "<group>"; };
+		A1B2C300000000000000002B /* Views/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/SettingsView.swift"; sourceTree = "<group>"; };
+		A1B2C3000000000000000010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
+		A1B2C3000000000000000012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
+		A1B2C300000000000000000F /* WebDAVPhotoViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebDAVPhotoViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1B2C3000000000000000007 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1B2C3000000000000000003 = {isa = PBXGroup; children = (
+				A1B2C3000000000000000013 /* WebDAVPhotoViewerApp.swift */,
+				A1B2C3000000000000000015 /* Views/RootView.swift */,
+				A1B2C3000000000000000017 /* SessionStore.swift */,
+				A1B2C3000000000000000019 /* Models.swift */,
+				A1B2C300000000000000001B /* Services/WebDAVClient.swift */,
+				A1B2C300000000000000001D /* Services/KeychainHelper.swift */,
+				A1B2C300000000000000001F /* Services/ImageCache.swift */,
+				A1B2C3000000000000000021 /* Views/MasonryLayout.swift */,
+				A1B2C3000000000000000023 /* Views/RemoteImageView.swift */,
+				A1B2C3000000000000000025 /* Views/LoginView.swift */,
+				A1B2C3000000000000000027 /* Views/GalleryView.swift */,
+				A1B2C3000000000000000029 /* Views/PhotoDetailView.swift */,
+				A1B2C300000000000000002D /* Views/DirectoryBrowserView.swift */,
+				A1B2C300000000000000002B /* Views/SettingsView.swift */,
+				A1B2C3000000000000000010 /* Assets.xcassets */,
+				A1B2C3000000000000000012 /* Info.plist */
+		); name = WebDAVPhotoViewer; path = WebDAVPhotoViewer; sourceTree = "<group>"; };
+		A1B2C3000000000000000004 = {isa = PBXGroup; children = (
+			A1B2C300000000000000000F /* WebDAVPhotoViewer.app */
+		); name = Products; sourceTree = "<group>"; };
+		A1B2C3000000000000000002 = {isa = PBXGroup; children = (
+			A1B2C3000000000000000003 /* WebDAVPhotoViewer */,
+			A1B2C3000000000000000004 /* Products */
+		); sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1B2C3000000000000000005 /* WebDAVPhotoViewer */ = {isa = PBXNativeTarget; buildConfigurationList = A1B2C300000000000000000C; buildPhases = (
+			A1B2C3000000000000000006 /* Sources */,
+			A1B2C3000000000000000007 /* Frameworks */,
+			A1B2C3000000000000000008 /* Resources */
+		); buildRules = (); dependencies = (); name = WebDAVPhotoViewer; productName = WebDAVPhotoViewer; productReference = A1B2C300000000000000000F; productType = "com.apple.product-type.application"; };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1B2C3000000000000000001 /* Project object */ = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = 1; LastSwiftUpdateCheck = 1500; LastUpgradeCheck = 1500; TargetAttributes = { A1B2C3000000000000000005 = {CreatedOnToolsVersion = 15.0; }; }; }; buildConfigurationList = A1B2C3000000000000000009; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = A1B2C3000000000000000002; productRefGroup = A1B2C3000000000000000004; projectDirPath = ""; projectRoot = ""; targets = (
+			A1B2C3000000000000000005 /* WebDAVPhotoViewer */
+		); };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1B2C3000000000000000008 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (
+			A1B2C3000000000000000011 /* Assets.xcassets in Resources */
+		); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1B2C3000000000000000006 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
+			A1B2C3000000000000000014 /* WebDAVPhotoViewerApp.swift in Sources */,
+			A1B2C3000000000000000016 /* Views/RootView.swift in Sources */,
+			A1B2C3000000000000000018 /* SessionStore.swift in Sources */,
+			A1B2C300000000000000001A /* Models.swift in Sources */,
+			A1B2C300000000000000001C /* Services/WebDAVClient.swift in Sources */,
+			A1B2C300000000000000001E /* Services/KeychainHelper.swift in Sources */,
+			A1B2C3000000000000000020 /* Services/ImageCache.swift in Sources */,
+			A1B2C3000000000000000022 /* Views/MasonryLayout.swift in Sources */,
+			A1B2C3000000000000000024 /* Views/RemoteImageView.swift in Sources */,
+			A1B2C3000000000000000026 /* Views/LoginView.swift in Sources */,
+			A1B2C3000000000000000028 /* Views/GalleryView.swift in Sources */,
+			A1B2C300000000000000002A /* Views/PhotoDetailView.swift in Sources */,
+			A1B2C300000000000000002C /* Views/SettingsView.swift in Sources */,
+			A1B2C300000000000000002E /* Views/DirectoryBrowserView.swift in Sources */,
+		); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A1B2C300000000000000000A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A1B2C300000000000000000B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A1B2C300000000000000000D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+			CURRENT_PROJECT_VERSION = 4;
+			ENABLE_PREVIEWS = YES;
+			GENERATE_INFOPLIST_FILE = NO;
+			INFOPLIST_FILE = "WebDAVPhotoViewer/Info.plist";
+			INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+			INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+			LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks");
+			MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.WebDAVPhotoViewer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A1B2C300000000000000000E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+			CURRENT_PROJECT_VERSION = 4;
+			ENABLE_PREVIEWS = NO;
+			GENERATE_INFOPLIST_FILE = NO;
+			INFOPLIST_FILE = "WebDAVPhotoViewer/Info.plist";
+			INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+			INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+			LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks");
+			MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.WebDAVPhotoViewer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1B2C3000000000000000009 /* Build configuration list for PBXProject "WebDAVPhotoViewer" */ = {isa = XCConfigurationList; buildConfigurations = (
+			A1B2C300000000000000000A /* Debug */,
+			A1B2C300000000000000000B /* Release */
+		); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A1B2C300000000000000000C /* Build configuration list for PBXNativeTarget "WebDAVPhotoViewer" */ = {isa = XCConfigurationList; buildConfigurations = (
+			A1B2C300000000000000000D /* Debug */,
+			A1B2C300000000000000000E /* Release */
+		); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = A1B2C3000000000000000001;
+}
