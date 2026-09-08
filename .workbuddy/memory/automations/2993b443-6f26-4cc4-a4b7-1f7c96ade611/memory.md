@@ -11,3 +11,4 @@
 - 2026-09-08 13:20 执行：脚本检测到新变更，自动提交并 git push 成功，推送 d78de73..f1b66cd 到 main，最终提交 f1b66cd，EXIT_CODE=0，正常结束。未修改任何源代码。
 - 2026-09-08 14:20 执行：脚本提交新变更(8112638)后 git push 报 SSL_ERROR_SYSCALL（github.com:443），因全局 git 代理 socks5h://127.0.0.1:7890 失效——7890 端口虽在监听但不转发，且本机当前已可直连 GitHub(返回200)。改用临时禁用代理(-c http.proxy= -c https.proxy=)直连推送 f1b66cd..8112638 成功，main 已同步，未改任何源代码/配置。提示：若后续脚本再因代理失败，可同样绕过代理直连。
 - 2026-09-08 15:22 执行：脚本检测到新变更，自动提交并 git push 成功，推送 8112638..a77bf0b 到 main，最终提交 a77bf0b，EXIT_CODE=0，正常结束。未修改任何源代码。
+- 2026-09-08 16:23 执行：脚本检测到新变更自动提交(5d8f58f)，但 git push 经全局代理 socks5h://127.0.0.1:7890 报 SSL_ERROR_SYSCALL（代理不再转发）。直连可达 GitHub 但 git 报 Authentication failed——排查发现 osxkeychain 凭证助手拦截并返回了缓存的错误凭证，覆盖了 URL 内嵌的有效 PAT（PAT 经直连 API 验证返回 200 仍有效）。最终用 `git -c http.proxy= -c https.proxy= -c credential.helper= push origin main` 直连+禁用凭证助手推送成功(a77bf0b..5d8f58f)，main 同步至 5d8f58f，未改任何源代码。提示：代理失效时改直连并临时禁用 osxkeychain 即可绕过凭证冲突。
