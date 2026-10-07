@@ -335,3 +335,4 @@
 - 结果：同步失败。origin/main=5b80624，HEAD=c719a0b，本地未推送提交=1。未修改任何项目源码。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（需 Clash 7890 监听或沙箱出口恢复方可连通）。
 - 结论：同步成功，无需人工干预。
 - 2026-10-07 13:07 执行：按约束只运行 sync_github.sh。脚本检测到变更自动提交 178ffb1，但 git push 经全局代理 socks5h://127.0.0.1:7890 报 Couldn't connect to server（7890 端口未监听/不可用）。遵循"只执行同步脚本"约束未手动推送，同步失败，EXIT_CODE=128。当前 origin/main=5b80624，本地未推送提交 2 个（HEAD=178ffb1）。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
+- 2026-10-07 14:09 执行：按约束只运行 sync_github.sh。脚本检测到变更自动提交 a5e2826（auto-sync: 2026-10-07 14:09），但 git push 经全局代理 socks5h://127.0.0.1:7890 报 Couldn't connect to server（7890 端口未监听/不可用，Failed to connect to 127.0.0.1 port 7890 after 0 ms）。遵循"只执行同步脚本、不手动推送、不改源代码"约束未做绕过，同步失败，EXIT_CODE=128。当前 origin/main=5b80624，本地未推送提交共 3 个（c719a0b+178ffb1+a5e2826，HEAD=a5e2826），工作区干净。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（待代理恢复/直连可用时执行）。
