@@ -320,3 +320,11 @@
 - 处理：临时在仓库级 `git config http.proxy ""` / `https.proxy ""` 覆盖为直连（`curl https://github.com` 直连返回 200），运行脚本后 `git config --unset` 还原。
 - 结果：脚本输出「2026-10-07 10:00 无变更，跳过同步」(exit 0)，未产生提交/推送，符合预期（无变更即正常结束）。未修改任何项目源码。
 - 结论：自动化正常，无需人工干预。
+
+## 2026-10-07 11:03 执行记录
+- 任务：运行 sync_github.sh 同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：全局/仓库级 gitconfig 锁死 http.proxy=socks5h://127.0.0.1:7890（当前 DOWN，curl 7890 返回 000）；直连 github.com 返回 200。
+- 处理：沿用 09:58 已验证方案——临时 `git config http.proxy ""` / `https.proxy ""` 覆盖为直连，运行脚本后 `git config --unset` 还原，未遗留沙箱专用配置。
+- 结果：脚本检测到变更（上轮 09:58 写入的 automation memory.md 未提交）自动提交 5b80624（auto-sync: 2026-10-07 11:03），`git push origin main` 成功（309b92f..5b80624 main->main，EXIT_CODE=0）。还原后仓库级代理恢复为继承全局 7890。
+- 验证：工作树干净，未推送提交=0，origin/main=HEAD=5b80624，历史积压已清空。未修改任何项目源码。
+- 结论：同步成功，无需人工干预。
