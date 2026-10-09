@@ -365,3 +365,4 @@
 - 2026-10-09 04:42 执行：按约束只运行 sync_github.sh（未改任何源代码）。仓库本地代理覆盖仍为空（直连），脚本检测到变更自动提交并 git push 成功：推送 e3c89ec..a0b5903 到 main（含本轮 automation memory.md 写入所致变更），EXIT_CODE=0，同步完成。fetch 校验：本地 HEAD=a0b5903 与 origin/main=a0b5903 一致，未推送提交数=0。
 - 2026-10-09 05:43 执行：按约束只运行 sync_github.sh（未改任何源代码）。仓库本地代理覆盖仍为空（直连），脚本检测到变更自动提交并 git push 成功：推送 a0b5903..ab2608f 到 main（含本轮 automation memory.md 写入所致变更），EXIT_CODE=0，同步完成。fetch 校验：本地 HEAD=ab2608f 与 origin/main=ab2608f 一致，未推送提交数=0。
 - 2026-10-09 06:45 执行：按约束只运行 sync_github.sh（未改任何源代码）。仓库本地代理覆盖仍为空（直连），脚本检测到变更自动提交并 git push 成功：推送 ab2608f..3ede039 到 main（含本轮上轮 05:43 写入的 automation memory.md 未提交所致变更），EXIT_CODE=0，同步完成。未修改任何源代码。
+- 2026-10-09 09:50 执行：按约束只运行 sync_github.sh（未改任何源代码）。仓库本地代理覆盖仍为空（直连，全局 socks5h://127.0.0.1:7890 仍 DOWN、直连返回 200），脚本检测到变更（上轮 06:45 写入的 automation memory.md 未提交）自动提交 e6c5392 并 git push 成功：推送 c5eaf92..e6c5392 到 main，EXIT_CODE=0。fetch 校验：本地 HEAD=e6c5392 与 origin/main=e6c5392 一致，未推送提交数=0，工作区干净。未修改任何源代码。
