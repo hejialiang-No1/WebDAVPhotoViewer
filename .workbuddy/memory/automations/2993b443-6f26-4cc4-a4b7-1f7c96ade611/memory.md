@@ -390,3 +390,9 @@
 - 现象：脚本检测到变更（上轮 15:07 写入的 automation memory.md 未提交）自动提交 060dbac（auto-sync: 2026-10-18 16:14），但 git push 经全局代理 socks5h://127.0.0.1:7890 到达 GitHub 后报 `fatal: Authentication failed for 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/'`，EXIT_CODE=128。
 - 结果：同步失败（认证失败，非脚本错误、非无变更）。当前 origin/main=f5750ee、HEAD=060dbac、本地未推送提交=2（9235f88+060dbac）、工作区干净。遵循"只执行同步脚本"约束未手动推送，未修改任何源代码。
 - 原因简析：凭据失效/凭据助手未提供有效 token（此前 10-18 多次推送成功，本次突变为认证失败，疑为缓存凭据过期或凭据助手未挂载）。恢复命令：`git -c credential.helper= push origin main` 或待凭据恢复后重跑 sync_github.sh。
+
+## 2026-10-18 17:18 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本检测到变更（上轮 16:14 写入的 automation memory.md 未提交）自动提交 992c4ff（auto-sync: 2026-10-18 17:18），但 git push 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... Recv failure: Operation timed out`（github.com:443 连接超时），EXIT_CODE=128。
+- 结果：同步失败（网络/代理不可达，非脚本错误、非无变更）。当前 origin/main=f5750ee、HEAD=992c4ff、本地未推送提交=3（9235f88+060dbac+992c4ff）、工作区干净。遵循"只执行同步脚本"约束未手动推送，未修改任何源代码。
+- 原因简析：全局代理 socks5h://127.0.0.1:7890 仍不可达、直连亦超时（瞬时网络/代理故障）。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（待代理/网络恢复后执行）。
