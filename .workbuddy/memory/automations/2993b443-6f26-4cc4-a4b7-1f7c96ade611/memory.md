@@ -396,3 +396,4 @@
 - 现象：脚本检测到变更（上轮 16:14 写入的 automation memory.md 未提交）自动提交 992c4ff（auto-sync: 2026-10-18 17:18），但 git push 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... Recv failure: Operation timed out`（github.com:443 连接超时），EXIT_CODE=128。
 - 结果：同步失败（网络/代理不可达，非脚本错误、非无变更）。当前 origin/main=f5750ee、HEAD=992c4ff、本地未推送提交=3（9235f88+060dbac+992c4ff）、工作区干净。遵循"只执行同步脚本"约束未手动推送，未修改任何源代码。
 - 原因简析：全局代理 socks5h://127.0.0.1:7890 仍不可达、直连亦超时（瞬时网络/代理故障）。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（待代理/网络恢复后执行）。
+- 2026-10-18 18:21 执行：按约束只运行 sync_github.sh。脚本检测到变更（automation memory.md 被上一轮写入）自动提交 396315b 并 git push 经全局代理 socks5h://127.0.0.1:7890 成功推送，推送 f5750ee..396315b 到 main，EXIT_CODE=0。fetch 校验本地 HEAD=396315b 与 origin/main=396315b 一致，未推送提交数=0，此前积压的提交一并被推上远程，同步完成。未修改任何源代码。
