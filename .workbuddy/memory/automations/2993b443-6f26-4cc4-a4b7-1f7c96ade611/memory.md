@@ -404,3 +404,4 @@
 - 现象：脚本检测到变更（上轮写入的 automation memory.md 未提交等）自动提交 7277862（auto-sync: 2026-10-18 20:25），但 git push 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: Authentication failed for 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/'`，EXIT_CODE=128。
 - 结果：同步失败（认证失败，非脚本错误、非无变更）。当前 origin/main=7352558、HEAD=7277862、本地未推送提交=1、工作区干净。遵循"只执行同步脚本"约束未手动推送，未修改任何源代码。
 - 原因简析：凭据失效/凭据助手未提供有效 token（10-18 多次推送成功，本次突变为认证失败）。恢复命令：`git -c credential.helper= push origin main` 或待凭据恢复后重跑 sync_github.sh。
+- 2026-10-18 21:29 执行：按约束只运行 sync_github.sh。脚本检测到变更自动提交 bc75ac3 并 git push 经全局代理 socks5h://127.0.0.1:7890 成功推送，推送 7352558..bc75ac3 到 main，EXIT_CODE=0，同步完成。未修改任何源代码。
