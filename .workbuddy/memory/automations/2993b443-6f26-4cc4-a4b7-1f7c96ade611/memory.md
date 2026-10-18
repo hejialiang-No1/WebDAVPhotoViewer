@@ -383,3 +383,4 @@
 - 2026-10-18 11:02 执行：按约束只运行 sync_github.sh（未改任何源代码）。脚本检测到变更自动提交 85b49b4 并 git push 成功：推送 877a2ad..85b49b4 到 main，EXIT_CODE=0。同步完成。
 - 2026-10-18 12:04 执行：按约束只运行 sync_github.sh（未改任何源代码）。脚本检测到变更（automation memory.md 被上一轮写入）自动提交 bd838fa 并 git push 成功：推送 85b49b4..bd838fa 到 main（含此前所有积压未推送提交），EXIT_CODE=0。fetch 校验：本地 HEAD=bd838fa 与 origin/main=bd838fa 一致，未推送提交数=0，工作区干净。同步完成。
 - 2026-10-18 14:06 执行：按约束只运行 sync_github.sh（未改任何源代码）。脚本检测到变更自动提交 f5750ee 并 git push 成功：推送 712a4d9..f5750ee 到 main，EXIT_CODE=0。fetch 校验：本地 HEAD=f5750ee 与 origin/main=f5750ee 一致，未推送提交数=0，工作区干净。同步完成。
+- 2026-10-18 15:07 执行：按约束只运行 sync_github.sh（未改任何源代码）。脚本检测到变更自动提交 9235f88（auto-sync: 2026-10-18 15:07），但 git push 失败：SSL connection timeout（github.com:443 连接超时，全局代理 socks5h://127.0.0.1:7890 仍 DOWN、直连亦超时），EXIT_CODE=128。同步失败（网络/代理不可达，非脚本错误）。当前 origin/main=f5750ee、HEAD=9235f88、本地未推送提交=1、工作区干净。遵循"只执行同步脚本"约束未手动推送。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（待代理/网络恢复后执行）。
