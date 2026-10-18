@@ -407,3 +407,9 @@
 - 2026-10-18 21:29 执行：按约束只运行 sync_github.sh。脚本检测到变更自动提交 bc75ac3 并 git push 经全局代理 socks5h://127.0.0.1:7890 成功推送，推送 7352558..bc75ac3 到 main，EXIT_CODE=0，同步完成。未修改任何源代码。
 - 2026-10-18 22:33 执行：按约束只运行 sync_github.sh（未改任何源代码）。脚本检测到变更自动提交 fcbda6f 并 git push 经全局代理 socks5h://127.0.0.1:7890 成功推送，推送 bc75ac3..fcbda6f 到 main，EXIT_CODE=0。fetch 校验：本地 HEAD=fcbda6f 与 origin/main=fcbda6f 一致，未推送提交数=0，工作区干净，同步完成。
 - 2026-10-18 23:35 执行：按约束只运行 sync_github.sh（未改任何源代码）。脚本检测到变更自动提交并 git push 经全局代理 socks5h://127.0.0.1:7890 成功推送，推送 fcbda6f..44beb22 到 main，EXIT_CODE=0，同步完成。未修改任何源代码。
+
+## 2026-10-19 00:36 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本检测到变更（上轮 23:35 写入的 automation memory.md 未提交）自动提交 1467938（auto-sync: 2026-10-19 00:36），但 git push 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... Recv failure: Operation timed out`（github.com:443 连接超时），EXIT_CODE=128。
+- 结果：同步失败（网络/代理不可达，非脚本错误、非无变更）。当前 origin/main=44beb22、HEAD=1467938、本地未推送提交=1、工作区干净。遵循"只执行同步脚本"约束未手动推送，未修改任何源代码。
+- 原因简析：全局代理 socks5h://127.0.0.1:7890 仍不可达、直连亦超时（瞬时网络/代理故障）。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（待代理/网络恢复后执行）。
