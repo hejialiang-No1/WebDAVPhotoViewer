@@ -489,3 +489,4 @@
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本检测到变更自动提交 b02197e（auto-sync: 2026-10-19 23:43），git push 成功推送 fc7e5ad..b02197e 到 main（含此前积压的 2 个未推送提交一并推上），EXIT_CODE=0，同步完成。
 - 结果：fetch 校验本地 HEAD=origin/main=b02197e，未推送提交数=0，工作区干净。未修改任何源代码。
+- 2026-10-20 00:45 执行：按约束只运行 sync_github.sh。脚本检测到变更自动提交 46179fa，git push 成功推送 b02197e..46179fa 到 main（经全局代理 socks5h://127.0.0.1:7890，本次可用），EXIT_CODE=0，同步完成。未修改任何源代码。
