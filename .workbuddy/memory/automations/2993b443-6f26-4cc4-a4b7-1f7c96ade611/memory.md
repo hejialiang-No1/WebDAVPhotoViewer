@@ -484,3 +484,8 @@
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本检测到变更（上一轮 21:37 automation memory.md 被写入未推送）自动提交 f791dc5（auto-sync: 2026-10-19 22:40），但 git push 报 `fatal: Authentication failed for 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/'`（EXIT_CODE=128）。本次为凭证失败：URL 内已内嵌有效 PAT，但 osxkeychain 凭证助手返回缓存的失效凭证并将其覆盖，非代理/网络问题。遵循"只执行同步脚本"约束未手动推送，同步失败。
 - 结果：当前 origin/main=fc7e5ad，本地未推送提交 2 个（f2d3507[21:37] + f791dc5[22:40]）、HEAD=f791dc5、工作区干净。未修改任何源代码。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（若仍认证失败，需核验 PAT 或清 osxkeychain 缓存）。
+
+## 2026-10-19 23:43 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本检测到变更自动提交 b02197e（auto-sync: 2026-10-19 23:43），git push 成功推送 fc7e5ad..b02197e 到 main（含此前积压的 2 个未推送提交一并推上），EXIT_CODE=0，同步完成。
+- 结果：fetch 校验本地 HEAD=origin/main=b02197e，未推送提交数=0，工作区干净。未修改任何源代码。
