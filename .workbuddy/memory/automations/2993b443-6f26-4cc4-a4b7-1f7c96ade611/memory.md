@@ -463,3 +463,8 @@
 - 结果：fetch 校验本地 HEAD=origin/main=66ad3f2，未推送提交数=0，工作区干净。未修改任何源代码。
 - 2026-10-19 16:22 执行：按约束只运行 sync_github.sh（未改任何源代码）。脚本检测到变更自动提交并 git push 经全局代理 socks5h://127.0.0.1:7890 成功，推送 66ad3f2..30bcfb3 到 main，EXIT_CODE=0，同步完成。
 - 2026-10-19 17:23 执行：按约束只运行 sync_github.sh（未改任何源代码）。脚本检测到变更（上一轮 automation memory.md 写入）自动提交 8205cd3（auto-sync: 2026-10-19 17:23），但 git push 经全局代理 socks5h://127.0.0.1:7890 报 **Authentication failed**（github.com/hejialiang-No1/WebDAVPhotoViewer.git），耗时约 3m34s 后失败，EXIT_CODE=128。本次为凭证失败（非此前常见代理 SSL_ERROR/超时），可能为 PAT 失效或被 osxkeychain 凭证助手缓存覆盖。遵循"只执行同步脚本"约束未手动推送，同步失败。当前 origin/main=30bcfb3，本地未推送提交 1 个（HEAD=8205cd3）。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（若仍认证失败，需核验 PAT 是否有效）。
+
+## 2026-10-19 18:28 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本检测到变更（上一轮 17:23 automation memory.md 写入未推送）自动提交 2f78c07（auto-sync: 2026-10-19 18:28），但 git push 报 `fatal: Authentication failed for 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/'`（EXIT_CODE=128）。本次为凭证失败：连接已建立、认证被拒，疑似 PAT 失效或 osxkeychain 凭证助手缓存了失效凭证覆盖有效 PAT，非代理/网络问题。遵循"只执行同步脚本"约束未手动推送，同步失败。
+- 结果：当前 origin/main=30bcfb3，本地未推送提交 2 个（8205cd3[17:23] + 2f78c07[18:28]）、HEAD=2f78c07、工作区干净。未修改任何源代码。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（若仍认证失败，需核验 PAT 是否有效）。
