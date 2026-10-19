@@ -444,3 +444,8 @@
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本检测到变更（上轮 05:47 写入的 automation memory.md 未提交）自动提交 327a291（auto-sync: 2026-10-19 06:49），但 git push 报 `fatal: Authentication failed for 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/'`（本次为凭证失败，非代理连接错误），EXIT_CODE=128，同步失败。
 - 结果：当前 origin/main=ec3eee8，本地未推送提交 1 个（HEAD=327a291）。遵循"只执行同步脚本"约束未手动推送。恢复命令（需用户在可联网环境执行）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（绕过 osxkeychain 错误凭证，使用 URL 内嵌或钥匙串有效 PAT）。
+
+## 2026-10-19 07:53 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本检测到变更（上轮 06:49 写入的 automation memory.md 未提交）自动提交 00fe3e6（auto-sync: 2026-10-19 07:53），但 git push 报 `fatal: Authentication failed for 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/'`（凭证失败，非代理连接错误），EXIT_CODE=128，同步失败。
+- 结果：当前 origin/main=ec3eee8，本地未推送提交 2 个（327a291[06:49] + 00fe3e6[07:53]）、HEAD=00fe3e6、工作区干净。遵循"只执行同步脚本"约束未手动推送。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（绕过 osxkeychain 错误凭证，使用钥匙串有效 PAT，需用户/可联网环境执行）。
