@@ -478,3 +478,4 @@
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本检测到变更自动提交 fc7e5ad（auto-sync: 2026-10-19 20:35），git push 成功推送 6bfb99a..fc7e5ad 到 main，EXIT_CODE=0，同步完成。
 - 结果：fetch 校验本地 HEAD=origin/main=fc7e5ad，ahead/behind=0/0，工作区干净。未修改任何源代码。
+- 2026-10-19 21:37 执行：按约束只运行 sync_github.sh（未改任何源代码）。脚本检测到变更（上一轮 automation memory.md 被写入）自动提交 f2d3507（auto-sync: 2026-10-19 21:37），但 git push 经全局代理 socks5h://127.0.0.1:7890 报 Recv failure: Operation timed out（7890 端口不可用）。遵循"只执行同步脚本"约束未手动推送，同步失败，EXIT_CODE=128。当前 origin/main=fc7e5ad，本地未推送提交 1 个（HEAD=f2d3507）。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
