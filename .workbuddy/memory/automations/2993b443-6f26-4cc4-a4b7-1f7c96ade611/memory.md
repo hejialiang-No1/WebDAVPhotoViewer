@@ -528,4 +528,9 @@
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本检测到变更（上轮 13:11 写入的 automation memory.md）自动提交 9a84c9c（auto-sync: 2026-10-20 14:14），但 git push 报 `fatal: Authentication failed for 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/'`（EXIT_CODE=128），与 10-20 06:56、10-20 13:11 同类凭证/osxkeychain 覆盖故障。遵循"只执行同步脚本"约束未手动推送，同步失败。
 - 结果：当前 origin/main=e66f5de，本地未推送提交 2 个（5fbe7cb[13:11] + 9a84c9c[14:14]）、HEAD=9a84c9c、工作区干净。未修改任何源代码。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（若仍认证失败，需刷新钥匙串或改用 URL 内嵌有效 PAT）。
+
+## 2026-10-20 18:53 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本检测到变更（上轮 14:14 写入的 automation memory.md 及积压的 2 个未推送提交）自动提交 502fe22（auto-sync: 2026-10-20 18:53），git push 成功推送 9c3c30b..502fe22 到 main（含此前积压的 5fbe7cb、9a84c9c 一并推上），EXIT_CODE=0，同步完成。
+- 结果：fetch 校验本地 HEAD=origin/main=502fe22，未推送提交数=0，工作区干净，此前积压未推送提交已全部清空。未修改任何源代码。
 - 2026-10-20 15:20 执行：按约束只运行 sync_github.sh。脚本检测到变更（上轮 14:14 写入的 automation memory.md）自动提交 659c72b（auto-sync: 2026-10-20 15:20），git push 经全局代理 socks5h://127.0.0.1:7890 成功推送 e66f5de..659c72b 到 main——此前积压的 2 个未推送提交(5fbe7cb+9a84c9c)一并被推上远程。fetch 校验：本地 HEAD=659c72b 与 origin/main=659c72b 一致，未推送提交数=0，同步完成，EXIT_CODE=0。未修改任何源代码。
