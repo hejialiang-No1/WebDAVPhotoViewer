@@ -517,3 +517,8 @@
 - 现象：脚本检测到变更（上轮 10:03 写入的 automation memory.md）自动提交 4b1c9e9（auto-sync: 2026-10-20 11:07），git push 成功推送 8b7777f..4b1c9e9 到 main，EXIT_CODE=0，同步完成。
 - 结果：本地 HEAD=origin/main=4b1c9e9，未推送提交数=0，工作区干净。未修改任何源代码。
 - 结果：fetch 校验本地 HEAD=origin/main=8b7777f，ahead/behind=0/0，工作区干净。未修改任何源代码。
+
+## 2026-10-20 13:11 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本检测到变更（上轮 11:07 写入的 automation memory.md）自动提交 5fbe7cb（auto-sync: 2026-10-20 13:11），但 git push 报 `fatal: Authentication failed for 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/'`（EXIT_CODE=128），与 10-20 06:56、10-19 22:40 同类凭证/osxkeychain 覆盖故障。遵循"只执行同步脚本"约束未手动推送，同步失败。
+- 结果：当前 origin/main=e66f5de，本地未推送提交 1 个（HEAD=5fbe7cb=5fbe7cb，auto-sync: 13:11），工作区干净。未修改任何源代码。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（若仍认证失败，需刷新钥匙串或改用 URL 内嵌有效 PAT）。
