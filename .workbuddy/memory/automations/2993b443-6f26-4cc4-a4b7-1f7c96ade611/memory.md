@@ -547,3 +547,8 @@
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本检测到变更（上轮 20:58 写入的 automation memory.md）自动提交 87f8ee7（auto-sync: 2026-10-20 22:01），git push 成功推送 4319ffa..87f8ee7 到 main，EXIT_CODE=0，同步完成。
 - 结果：fetch 校验本地 HEAD=origin/main=87f8ee7，未推送提交数=0，工作区干净。未修改任何源代码。
+
+## 2026-10-20 23:11 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本检测到变更（上轮 22:01 写入的 automation memory.md）自动提交 edc65f3（auto-sync: 2026-10-20 23:11），但 git push 报 `fatal: unable to access 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/': Failed to connect to github.com port 443 after 75038 ms: Couldn't connect to server`（EXIT_CODE=128），与 10-20 19:54 同类——全局 SOCKS5 代理 socks5h://127.0.0.1:7890 不可达/未在沙箱监听，导致连接超时。遵循"只执行同步脚本"约束未手动推送，同步失败。
+- 结果：当前 origin/main=87f8ee7，本地未推送提交 1 个（HEAD=edc65f3），工作区干净。未修改任何源代码。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（若代理不可达，需改直连或可用代理）。
