@@ -627,3 +627,8 @@
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本检测工作区无变更，输出"无变更，跳过同步"，EXIT_CODE=0，正常结束，未提交、未推送、未改动任何源代码。
 - 2026-10-25（本次重跑）执行：按约束只运行 sync_github.sh。脚本再次检测工作区无变更，输出"无变更，跳过同步"，EXIT_CODE=0，正常结束，未提交、未推送、未改动任何源代码。origin/main 维持历史最终同步点不变。
+
+## 2026-10-25 20:41 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 `git add -A` 检测到变更，自动提交 94565cb（auto-sync: 2026-10-25 20:41），但 `git push` 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... WebDAVPhotoViewer.git/': Error in the HTTP2 framing layer`（EXIT_CODE=128）。诊断：本沙箱直连 github.com 超时（curl 15s 返回 000），全部流量走 7890 代理；本次连接在建立后遭 HTTP2 帧层错误，属瞬时代理故障（与历次 7890 不可达/超时同类，非脚本缺陷）。
+- 结果：origin/main=18e5fb0，本地积压未推送提交 4 个（8d8fe80+d530621+a15cad2+94565cb，HEAD=94565cb），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理直连，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`；或在下次脚本自动提交且 7890 代理恢复时一并推送。
