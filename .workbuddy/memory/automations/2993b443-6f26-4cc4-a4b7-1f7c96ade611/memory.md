@@ -598,10 +598,20 @@
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本检测到变更（上轮 automation memory.md 被写入）自动提交 18e5fb0（auto-sync: 2026-10-24 20:11），git push 经全局代理 socks5h://127.0.0.1:7890 成功推送 3f8c06d..18e5fb0 到 main，EXIT_CODE=0，同步完成。未修改任何源代码。
 
+## 2026-10-25 19:36/19:38 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本（自动化框架与本次会话多次触发）检测到 automation memory.md 变更，先后自动提交 8d8fe80、d530621（auto-sync: 2026-10-25 19:36）与 a15cad2（auto-sync: 2026-10-25 19:38）；但 git push 经全局代理 socks5h://127.0.0.1:7890 一律报 `Recv failure: Operation timed out`（github.com:443，7890 代理在沙箱内不可达/超时），全部 push 失败，EXIT_CODE=128。遵循"只执行同步脚本"约束未手动推送，同步失败。
+- 结果：origin/main=18e5fb0，本地未推送提交 3 个（8d8fe80+d530621+a15cad2，HEAD=a15cad2），工作区干净。未修改任何源代码。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（需代理可达或直连可达）。
+
 ## 2026-10-25 19:36 执行记录
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本检测到变更自动提交 d530621（auto-sync: 2026-10-25 19:36），但 git push 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/': Recv failure: Operation timed out`（github.com:443，EXIT_CODE=128），与 10-20/10-21/10-24 历次同类——全局 SOCKS5 代理 socks5h://127.0.0.1:7890 在本沙箱会话内不可达（curl 直连 github.com 亦超时，HTTPS_PROXY 为空）。遵循"只执行同步脚本"约束未手动推送，同步失败。
 - 结果：当前 origin/main=18e5fb0，本地未推送提交 2 个（8d8fe80+d530621，HEAD=d530621），工作区含 memory.md 未暂存修改。未修改任何源代码。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（需代理可用或直连可达后再由下次脚本推送）。
+
+## 2026-10-25 19:38 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本检测到变更（memory.md 未暂存修改被 git add -A 暂存）自动提交 a15cad2（auto-sync: 2026-10-25 19:38），但 git push 报 `fatal: unable to access 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/': Failed to connect to github.com port 443 after 75003 ms: Couldn't connect to server`（EXIT_CODE=128）。与历次不同点：本次 curl 直连 github.com 返回 HTTP 200（网络已恢复），失败 solely 因全局 git 代理 socks5h://127.0.0.1:7890 未监听（curl -x 7890 立即 Couldn't connect）。遵循"只执行同步脚本"约束未手动推送，同步失败。
+- 结果：origin/main=18e5fb0，本地积压未推送提交 3 个（8d8fe80+d530621+a15cad2，HEAD=a15cad2），工作区仍含 memory.md 未暂存修改。未修改任何源代码。可用恢复（绕过死代理，直连）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（但按约束本次未执行，留给后续或用户决定）。
 
 ## 2026-10-25 19:36 执行记录
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
