@@ -600,6 +600,11 @@
 
 ## 2026-10-25 19:36 执行记录
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本检测到变更自动提交 d530621（auto-sync: 2026-10-25 19:36），但 git push 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/': Recv failure: Operation timed out`（github.com:443，EXIT_CODE=128），与 10-20/10-21/10-24 历次同类——全局 SOCKS5 代理 socks5h://127.0.0.1:7890 在本沙箱会话内不可达（curl 直连 github.com 亦超时，HTTPS_PROXY 为空）。遵循"只执行同步脚本"约束未手动推送，同步失败。
+- 结果：当前 origin/main=18e5fb0，本地未推送提交 2 个（8d8fe80+d530621，HEAD=d530621），工作区含 memory.md 未暂存修改。未修改任何源代码。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（需代理可用或直连可达后再由下次脚本推送）。
+
+## 2026-10-25 19:36 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本 `git add -A` 后 `git diff --cached --quiet` 判定工作区无变更，输出"2026-10-25 19:36 无变更，跳过同步"，EXIT_CODE=0，正常结束（无新提交、无推送）。
 - 结果：未产生提交，未推送，工作区干净。未修改任何源代码。
 
@@ -611,3 +616,4 @@
 ## 2026-10-25 19:36 执行记录
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本检测工作区无变更，输出"无变更，跳过同步"，EXIT_CODE=0，正常结束，未提交、未推送、未改动任何源代码。
+- 2026-10-25（本次重跑）执行：按约束只运行 sync_github.sh。脚本再次检测工作区无变更，输出"无变更，跳过同步"，EXIT_CODE=0，正常结束，未提交、未推送、未改动任何源代码。origin/main 维持历史最终同步点不变。
