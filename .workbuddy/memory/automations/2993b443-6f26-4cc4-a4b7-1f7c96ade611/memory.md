@@ -650,3 +650,8 @@
 - 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本 `git add -A` 检测到变更，自动提交 8220c9e（auto-sync: 2026-10-26 02:59），但 `git push origin main` 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... WebDAVPhotoViewer.git/': Recv failure: Operation timed out`（EXIT_CODE=128）。诊断：7890 代理在沙箱内不可达（连接超时），属历次同类代理故障，非脚本缺陷。
 - 结果：origin/main=6856805，本地积压未推送提交 2 个（ba75412+8220c9e，HEAD=8220c9e），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（或待下次脚本自动提交且 7890 代理恢复时一并推送）。
+
+## 2026-10-26 04:02 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 检测到变更（automation memory.md 未暂存修改）自动提交 104e767（auto-sync: 2026-10-26 04:02），但 git push origin main 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... WebDAVPhotoViewer.git/': Error in the HTTP2 framing layer`（EXIT_CODE=128）。诊断：7890 代理在沙箱内不可达/HTTP2 帧层错误，属历次同类代理故障，非脚本缺陷。
+- 结果：origin/main=6856805，本地积压未推送提交 3 个（ba75412+8220c9e+104e767，HEAD=104e767），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（或待下次脚本自动提交且 7890 代理恢复时一并推送）。
