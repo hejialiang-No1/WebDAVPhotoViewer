@@ -662,3 +662,8 @@
 - 结果：origin/main=6856805，本地积压未推送提交 4 个（HEAD=4527967），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
 - 2026-10-26 06:08 执行：按约束只运行 sync_github.sh（未改任何源代码）。脚本检测到变更（上一轮 automation memory.md 写入）自动提交 0f7e94e（auto-sync: 2026-10-26 06:08），但 git push origin main 报 `fatal: Authentication failed for 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/'`（EXIT_CODE=128）——本次为凭证认证失败（osxkeychain 返回无效/过期凭证），与历次 7890 代理故障不同。遵循"只执行同步脚本"约束未手动推送，同步失败。当前 origin/main=6856805，本地积压未推送提交 5 个（HEAD=0f7e94e），工作区干净。恢复命令（直连+禁用凭证助手，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
 - 2026-10-26 07:13 执行：按约束只运行 sync_github.sh。脚本检测到变更自动提交 14da757 并 git push 经全局代理 socks5h://127.0.0.1:7890 成功推送，推送 6856805..14da757 到 main，EXIT_CODE=0，同步完成。fetch 校验：本地 HEAD=14da757 与 origin/main=14da757 一致，未推送提交数=0，未改任何源代码。
+
+## 2026-10-26 18:45 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 检测到变更（上轮 automation memory.md 残留未提交修改）自动提交 d8184b0（auto-sync: 2026-10-26 18:46），但 git push origin main 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... WebDAVPhotoViewer.git/': LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443`（EXIT_CODE=128）。诊断：7890 代理在沙箱内不可达，属历次同类代理故障，非脚本缺陷。
+- 结果：origin/main=14da757，本地积压未推送提交 1 个（d8184b0，HEAD=d8184b0），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（或待下次脚本自动提交且 7890 代理恢复时一并推送）。
