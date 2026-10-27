@@ -741,3 +741,9 @@
 - 诊断：7890 代理在沙箱内不可达（连接超时），属历次同类代理故障，非脚本缺陷。
 - 结果：origin/main=70def57，本地积压未推送提交 2 个（1620adb+7ebbd5b，HEAD=7ebbd5b），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
 - 2026-10-27 18:49 执行（本次触发）：脚本检测到变更自动提交后 git push 报 `Failed to connect to github.com port 443 after 75003 ms: Couldn't connect to server`（EXIT_CODE=128）。与并发轮次结果一致，未做手动绕过。当前 origin/main=70def57，本地未推送提交 2 个，工作区另有本自动化 memory.md 待提交改动（下次脚本会一并提交）。
+
+## 2026-10-27 20:00 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 检测到变更（本自动化 memory.md 待提交改动），自动提交 f3f3e0f（auto-sync: 2026-10-27 20:00）；git push origin main 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... WebDAVPhotoViewer.git/': Error in the HTTP2 framing layer`（EXIT_CODE=128）。
+- 诊断：HTTP2 framing 层错误，属全局代理不可达/链路异常的同类故障，非脚本缺陷。
+- 结果：origin/main=70def57，本地积压未推送提交 3 个（1620adb+7ebbd5b+f3f3e0f，HEAD=f3f3e0f），工作区干净（本自动化 memory.md 已随 f3f3e0f 提交）。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
