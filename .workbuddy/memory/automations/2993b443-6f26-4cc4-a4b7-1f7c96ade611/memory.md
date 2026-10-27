@@ -677,3 +677,37 @@
 - 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本 git add -A 检测到变更（上轮 automation memory.md 残留修改）自动提交 e0a6b44（auto-sync: 2026-10-26 20:52），但 git push origin main 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... WebDAVPhotoViewer.git/': Recv failure: Operation timed out`（EXIT_CODE=128）。诊断：7890 代理在沙箱内不可达（连接超时），属历次同类代理故障，非脚本缺陷。
 - 结果：origin/main=14da757，本地积压未推送提交 3 个（d8184b0+5a9c1a3+e0a6b44，HEAD=e0a6b44），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（或待下次脚本自动提交且 7890 代理恢复时一并推送）。
+
+## 2026-10-27 11:39 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 未检测到暂存差异（工作区相对 HEAD 干净，无新改动），输出"无变更，跳过同步"，EXIT_CODE=0，未提交、未推送、未生成空提交。
+- 结果：正常结束（按约定视为"无变更"正常结束）。origin/main=14da757 不变，本地此前积压的 3 个未推送提交（d8184b0+5a9c1a3+e0a6b44，HEAD=e0a6b44）仍未推送，工作区干净。恢复命令同上。
+
+## 2026-10-27 11:39 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 后 git diff --cached --quiet 判定工作区无新变更（工作树干净），输出"无变更，跳过同步"，EXIT_CODE=0，直接退出，未生成空提交、未推送。
+- 状态：本地 HEAD=93ccfb6；origin/main 落后本地 4 个提交（历史积压：前序若干 auto-sync 自动提交因全局代理 socks5h://127.0.0.1:7890 不可达/超时未推送）。本运行未改动任何源代码、未手动推送。
+- 结果：正常结束（无变更）。积压的 4 个提交需待 7890 代理恢复或手动推送方可同步到 origin/main。
+
+## 2026-10-27 11:39 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 `git add -A` 后 `git diff --cached --quiet` 判定工作区干净（上轮 memory.md 修改已在前次失败运行中被提交），输出"无变更，跳过同步"，EXIT_CODE=0，正常结束，未产生新提交。
+- 结果：origin/main=14da757，本地仍领先 origin/main 4 个提交（积压：d8184b0、5a9c1a3、e0a6b44 + 更早 1 个，HEAD 领先 4），工作区干净。这 4 个提交为历次 7890 代理不可达导致 push 失败的遗留，非本次产生；脚本因"无变更"提前退出故未推送积压。恢复（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
+
+## 2026-10-27 11:39 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 检测到变更（上轮 automation memory.md 残留修改）自动提交 93ccfb6（auto-sync: 2026-10-27 11:39），但 git push origin main 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: Authentication failed for 'https://github.com/hejialiang-No1/WebDAVPhotoViewer.git/'`（EXIT_CODE=128）。诊断：osxkeychain 返回无效/过期凭证导致 HTTPS 认证失败，与历次 7890 代理故障不同。
+- 结果：origin/main=14da757，本地积压未推送提交 4 个（HEAD=93ccfb6），工作区仍有 automation memory.md 未暂存修改。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（直连+禁用凭证助手并注入 token，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= -c url.https://github.com/.insteadOf= push origin main`（token 取 `security find-internet-password -s github.com -w`）。
+
+## 2026-10-27 11:39 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 后 git diff --cached --quiet 判定无变更，输出"无变更，跳过同步"，exit 0。本轮未提交、未推送。
+- 积压状态：本地 main (93ccfb6) 领先 origin/main (14da757) 共 4 个未推送提交（d8184b0、5a9c1a3、e0a6b44、93ccfb6），均为历次 auto-sync 提交（含 automation memory.md 概要），因 git push 经全局代理 socks5h://127.0.0.1:7890 不可达而积压。git fetch 校验亦报"Couldn't connect to server"（github.com:443 不可达）。
+- 结果：本轮正常结束（无变更）。遵循"只执行同步脚本"约束未手动推送；积压提交待 7890 代理或直连 GitHub 恢复后由脚本在检测到变更时一并推送。
+
+## 2026-10-27 11:38 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：本轮脚本 `git add -A` 后 `git diff --cached --quiet` 判定工作区无变更，输出"无变更，跳过同步"，EXIT_CODE=0，直接退出，未提交、未推送。
+- 背景：本地 HEAD=93ccfb6（auto-sync: 2026-10-27 11:39）由本次更早的 10:44 触发产生并提交；本轮工作树已干净故判定无变更。
+- 远程状态：因全局代理 socks5h://127.0.0.1:7890 不可达，`git fetch origin main` 报 `Couldn't connect to server`（EXIT_CODE=128），无法确认 93ccfb6 是否已推送；结合历次同类代理故障，93ccfb6 大概率仍积压在本地未推送。
+- 结果：本轮正常结束（无变更）。未修改任何源代码。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
