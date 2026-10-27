@@ -723,3 +723,8 @@
 - 现象：脚本 `git add -A` 检测到变更（上轮 automation memory.md 残留修改）自动提交 3b40196（auto-sync: 2026-10-27 12:47），但 `git push origin main` 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... WebDAVPhotoViewer.git/': Recv failure: Operation timed out`（EXIT_CODE=128）。
 - 诊断：7890 代理在沙箱内不可达（连接超时），属历次同类代理故障，非脚本缺陷。
 - 结果：origin/main=14da757，本地积压未推送提交 6 个（HEAD=3b40196），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
+
+## 2026-10-27 13:50 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 检测到变更（历次积压的 automation memory.md 概要修改）自动提交 093efc3（auto-sync: 2026-10-27 13:50），`git push origin main` 本次成功，输出 `14da757..093efc3 main -> main`，EXIT_CODE=0。本次全局代理 socks5h://127.0.0.1:7890 可达，故积压提交（含 14da757 之后的历次 auto-sync）一并推送。
+- 结果：同步成功。origin/main=本地 HEAD=093efc3，工作区干净，无未推送积压。未手动推送，仅执行同步脚本。
