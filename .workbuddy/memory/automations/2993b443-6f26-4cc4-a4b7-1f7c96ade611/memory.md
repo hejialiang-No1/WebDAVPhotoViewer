@@ -790,3 +790,10 @@
 - 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本 git add -A 检测到变更（本自动化 memory.md 上次轮次待提交改动），自动提交 cbbe5eb（auto-sync: 2026-10-28 22:42）；git push origin main 成功，输出 `434650a..cbbe5eb main -> main`，EXIT_CODE=0。本次沙箱出网代理可达，同步正常完成，未做任何手动绕过。
 - 结果：验证 HEAD=origin/main=cbbe5eb，未推送提交 0 个，工作区干净。同步成功。
+
+## 2026-10-28 23:44 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 检测到变更（本自动化 memory.md 上次轮次待提交改动），自动提交 81d312a（auto-sync: 2026-10-28 23:44）；git push origin main 报 `fatal: unable to access ... WebDAVPhotoViewer.git/': Recv failure: Operation timed out`（EXIT_CODE=128）。git ls-remote origin 同样超时。
+- 诊断：沙箱出网代理不可达/出网不通，属历次同类代理故障，非脚本缺陷。
+- 结果：origin/main=cbbe5eb，本地积压未推送提交 1 个（81d312a，HEAD=81d312a，ahead=1/behind=0），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。
+- 恢复命令（需在可达网络下执行）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`（若仍不通，改用 `git -c http.proxy=http://127.0.0.1:59087 -c https.proxy=http://127.0.0.1:59087 push origin main`）。
