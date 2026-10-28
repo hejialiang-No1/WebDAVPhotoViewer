@@ -753,3 +753,9 @@
 - 现象：脚本 git add -A 检测到变更（本自动化 memory.md 上次待提交改动），自动提交 04da711（auto-sync: 2026-10-27 20:03）；git push origin main 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... WebDAVPhotoViewer.git/': Failed to connect to github.com port 443 after 75033 ms: Couldn't connect to server`（EXIT_CODE=128）。
 - 诊断：7890 代理在沙箱内不可达（连接超时），属历次同类代理故障，非脚本缺陷。
 - 结果：origin/main=70def57，本地积压未推送提交 4 个（1620adb+7ebbd5b+f3f3e0f+04da711，HEAD=04da711），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
+
+## 2026-10-28 12:26 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 检测到变更（本自动化 memory.md 待提交改动），自动提交 2503d28（auto-sync: 2026-10-28 12:26）；git push origin main 经全局代理 socks5h://127.0.0.1:7890 报 `fatal: unable to access ... WebDAVPhotoViewer.git/': Failed to connect to github.com port 443 after 75034 ms: Couldn't connect to server`（EXIT_CODE=128）。
+- 诊断：7890 代理在沙箱内不可达（连接超时），属历次同类代理故障，非脚本缺陷。
+- 结果：origin/main=70def57，本地积压未推送提交 5 个（1620adb+7ebbd5b+f3f3e0f+04da711+2503d28，HEAD=2503d28），工作区干净。遵循"只执行同步脚本"约束未手动推送，同步失败。恢复命令（绕过死代理，需网络可达）：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
