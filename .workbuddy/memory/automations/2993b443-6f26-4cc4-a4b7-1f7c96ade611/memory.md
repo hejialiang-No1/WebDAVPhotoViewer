@@ -815,3 +815,4 @@
 - 现象：脚本 git add -A 检测到变更（本自动化 memory.md 待提交改动），自动提交后 git push origin main 成功，输出 `c4914e1..decd583 main -> main`，EXIT_CODE=0。本次沙箱出网代理可达，同步正常完成，未做任何手动绕过。
 - 结果：origin/main=本地 HEAD=decd583，未推送提交 0 个（ahead/behind=0/0），工作区干净。同步成功。
 - 恢复命令（令牌已嵌入 remote URL，需在可达网络下执行）：`git -c http.proxy=http://127.0.0.1:59087 -c https.proxy=http://127.0.0.1:59087 push origin main`（或直连 `git -c http.proxy= -c https.proxy= push origin main`）。
+- 2026-10-29 04:58 执行：按约束只运行 sync_github.sh。脚本检测到变更（上一轮 automation memory.md 写入）自动提交 7b1034d，但 git push 经全局代理 socks5h://127.0.0.1:7890 报 Recv failure: Operation timed out（github.com:443，7890 端口未监听/不可用）。遵循"只执行同步脚本"约束未手动推送，同步失败，EXIT_CODE=128。当前 origin/main=decd583，本地未推送提交 1 个（HEAD=7b1034d）。恢复命令：`git -c http.proxy=http://127.0.0.1:59087 -c https.proxy=http://127.0.0.1:59087 push origin main`（或直连 `git -c http.proxy= -c https.proxy= push origin main`）。
