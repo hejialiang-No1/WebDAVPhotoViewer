@@ -809,4 +809,9 @@
 - 现象：脚本 git add -A 检测到变更（本自动化 memory.md 上次轮次待提交改动，+5 行），自动提交 ea86664（auto-sync: 2026-10-29 01:50）；git push origin main 报 `fatal: Authentication failed for '...WebDAVPhotoViewer.git/'`（EXIT_CODE=128）。复测 git ls-remote 又变 `Recv failure: Operation timed out`。
 - 诊断（只读排查）：remote URL 内嵌 PAT 经 GitHub API 实测 HTTP 200（令牌有效、未过期）；`curl` 经沙箱 HTTP 代理可正常到达 GitHub（HTTP 200），但 `git push`/`git ls-remote` 走全局代理 socks5h://127.0.0.1:7890（down，连接超时）。根因是全局死代理导致 git 出网不稳，非脚本缺陷、非令牌失效。
 - 结果：本地积压未推送提交 1 个（ea86664，HEAD=ea86664，ahead=1/behind=0），工作区干净（本自动化 memory.md 已随 ea86664 提交）。遵循"只执行同步脚本"约束未手动推送，同步失败。
+
+## 2026-10-29 03:57 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 检测到变更（本自动化 memory.md 待提交改动），自动提交后 git push origin main 成功，输出 `c4914e1..decd583 main -> main`，EXIT_CODE=0。本次沙箱出网代理可达，同步正常完成，未做任何手动绕过。
+- 结果：origin/main=本地 HEAD=decd583，未推送提交 0 个（ahead/behind=0/0），工作区干净。同步成功。
 - 恢复命令（令牌已嵌入 remote URL，需在可达网络下执行）：`git -c http.proxy=http://127.0.0.1:59087 -c https.proxy=http://127.0.0.1:59087 push origin main`（或直连 `git -c http.proxy= -c https.proxy= push origin main`）。
