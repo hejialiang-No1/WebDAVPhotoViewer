@@ -821,3 +821,8 @@
 - 2026-10-29 07:06 执行：按约束只运行 sync_github.sh。脚本检测到变更自动提交 c2a7c49（auto-sync: 2026-10-29 07:06），git push origin main 经全局代理 socks5h://127.0.0.1:7890 成功推送，decd583..c2a7c49 到 main，EXIT_CODE=0。fetch 校验：本地 HEAD=c2a7c49 与 origin/main=c2a7c49 一致，未推送提交数=0，同步完成。未修改任何源代码。
 - 2026-10-29 09:27 执行：按约束只运行 sync_github.sh。脚本检测到变更（automation memory.md 被上一轮写入）自动提交 1926618，但 git push 经全局代理 socks5h://127.0.0.1:7890 报 Recv failure: Operation timed out（7890 端口不可用/不转发）。遵循"只执行同步脚本"约束未手动推送，同步失败，EXIT_CODE=128。当前 origin/main=23f7197，本地未推送提交 1 个（HEAD=1926618）。恢复命令：`git -c http.proxy= -c https.proxy= -c credential.helper= push origin main`。
 - 2026-10-29 10:37 执行：按约束只运行 sync_github.sh。脚本检测到变更自动提交 61be8eb（含积压的 1926618），git push origin main 经全局代理 socks5h://127.0.0.1:7890 成功推送，23f7197..61be8eb 到 main，EXIT_CODE=0。fetch 校验：本地 HEAD=61be8eb 与 origin/main=61be8eb 一致，未推送提交数=0，同步完成。未修改任何源代码。
+
+## 2026-10-29 11:40 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 检测到变更（automation memory.md 待提交改动），自动提交 8e83374（auto-sync: 2026-10-29 11:40）；git push origin main 成功，输出 `61be8eb..8e83374 main -> main`，EXIT_CODE=0。本次沙箱出网代理可达，同步正常完成，未做任何手动绕过。
+- 结果：验证 HEAD=origin/main=8e83374，未推送提交 0 个（ahead/behind=0/0），工作区干净。同步成功。
