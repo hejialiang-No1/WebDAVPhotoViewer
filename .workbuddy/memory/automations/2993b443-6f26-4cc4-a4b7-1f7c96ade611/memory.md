@@ -831,3 +831,8 @@
 - 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
 - 现象：脚本 git add -A 检测到变更（automation memory.md 上次轮次待提交改动），自动提交 36629ee（auto-sync: 2026-10-29 12:42）；git push origin main 成功，输出 `8e83374..36629ee main -> main`，EXIT_CODE=0。本次沙箱出网代理可达，同步正常完成，未做任何手动绕过。
 - 结果：fetch 校验 HEAD=origin/main=36629ee，未推送提交 0 个（ahead/behind=0/0），工作区干净。同步成功。
+
+## 2026-10-29 13:43 执行记录
+- 任务：按约束只运行 sync_github.sh（未改任何项目源代码），同步到 hejialiang-No1/WebDAVPhotoViewer@main。
+- 现象：脚本 git add -A 检测到变更（automation memory.md 上次轮次待提交改动），自动提交 7c48463（auto-sync: 2026-10-29 13:44）；git push origin main 经全局代理 socks5h://127.0.0.1:7890 报 Recv failure: Operation timed out（7890 端口超时/不可达）。遵循"只执行同步脚本"约束未手动推送，同步失败，EXIT_CODE=128。
+- 结果：origin/main=36629ee，本地未推送提交 1 个（HEAD=7c48463，ahead/behind=1/0），工作区干净。恢复命令：`git -c http.proxy=http://127.0.0.1:59087 -c https.proxy=http://127.0.0.1:59087 push origin main`（或直连 `git -c http.proxy= -c https.proxy= push origin main`）。
